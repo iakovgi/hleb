@@ -16,11 +16,10 @@
 
 #define $$HLEB_COMPILETIME_ASSERT(cond, msg, line)                          \
     do {                                                                    \
-        int __cond = !(cond);                                               \
-        void __attribute__((error(msg))) _hleb_compiletime_assert##line {}; \
-        if(__cond)                                                          \
-            _hleb_compiletime_assert##line();                               \
-        HLEB_BUILD_BUG_ON_ZERO(__cond);                                     \
+        __attribute__((error(msg)))                                         \
+            void _hleb_ct_assert_line_##line() {}                           \
+        if(!(cond))                                                         \
+            _hleb_ct_assert_line_##line();                                  \
     } while(0)
 
 #define ct_assert(cond)                                                     \
