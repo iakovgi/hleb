@@ -1,41 +1,40 @@
 #ifndef HLEB_UTILS_H
 #define HLEB_UTILS_H
 
+#include "ct_assert.h"
+
 #ifndef __GNUC__
     #error "hleb lib relies on GNU C extensions. Use gcc compiler"
 #endif
 
-#define str(s) #s
-#define xstr(s) str(s)
+#define HLEB_STINGIZE(e)        #e
+#define HLEB_STRINGIZE_V(e)     HLEB_STRINGIZE(e)
 
-#define __QLINE__ xstr(__LINE__)
+#define __QLINE__               HLEB_STRINGIZE_V(__LINE__)
 
-#define BUILD_BUG_ON(cond)      ((void)sizeof(char[1 - 2*!!(cond)]))
-#define BUILD_BUG_ON_ZERO(e)    (sizeof(struct{int:-!!(e)}))
+#define HLEB_SAME_TYPE(a, b)                                                \
+    __builtin_types_compatible_p(typeof(a), typeof(b))
 
-#define __same_type(a, b) __builtin_types_compatible_p(typeof(a), typeof(b))
-
-#define __STATIC_ASSERT_HELPER(cond, msg, pref, suf)            \
-    do {                                                        \
-        void __attribute__((error(msg))) pref ## suf() {};      \
-        if(!(cond))                                             \
-            pref ## suf();                                      \
+#define HLEB_TYPECHECK(type, e)                                             \
+    do {                                                                    \
+        HLEB_COMPILETIME_ASSERT(                                            \
+            HLEB_SAME_TYPE(typeof(e), type),                                \
+            "TYPECHECK failed on " #type " with " #e);                      \
     } while(0)
 
-#define _STATIC_ASSERT_HELPER(cond, msg, pref, suf)             \
-    __STATIC_ASSERT_HELPER(cond, msg, pref, suf)
 
-#define STATIC_ASSERT(cond, msg)                                \
-       _STATIC_ASSERT_HELPER(cond, msg, _assert_, __LINE__);
+#define HLEB_MUST_BE_ARRAY(a)                                               \
+    HLEB_BUILD_BUG_ON_ZERO(HLEB_SAME_TYPE((a), &(a)[0]))
 
-#define TYPECHECK(type, e) STATIC_ASSERT(                       \
-        __same_type(typeof(e), type),          \
-        "TYPECHECK failed on " #type " with " #e)
+#define HLEB_ARRAY_SIZE(a)                                                  \
+    (sizeof(a)/sizeof(a[0]) + HLEB_MUST_BE_ARRAY(a))
 
-// &a[0] degrades to pointer in case `a` is array
-#define __must_be_array(a) BUILD_BUG_ON_ZERO(__same_type((a), &(a)[0]))
-#define ARRAY_SIZE(a) (sizeof(a)/sizeof(a[0]) + __must_be_array(a))
+#define HLEB_FIELD_SIZEOF(s, f)     (sizeof(((s*)0)->f))
 
+#define $HLEB_COUNT_ARGS(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10,       \
+        _n, ...) _n
+#define HLEB_COUNT_ARGS(...)                                                \
+    $HLEB_COUNT_ARGS(, ##__VA_ARGS__, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
 
 #endif // HLEB_UTILS_H
 

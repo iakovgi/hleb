@@ -16,26 +16,26 @@
 #define UNDERLINED  CSI "4m"
 #define BLINK       CSI "5m"
 
-#define CURUP(n)    CSI str(n) "A"
-#define CURDOWN(n)  CSI str(n) "B"
-#define CURFWD(n)   CSI str(n) "C"
-#define CURBWD(n)   CSI str(n) "D"
-#define CURNXTL(n)  CSI str(n) "E"
-#define CURPRVL(n)  CSI str(n) "F"
-#define CURPOS(r,c) CSI str(r) ";" str(c) "H"
+#define CURUP(n)    CSI HLEB_STRINGIZE_V(n) "A"
+#define CURDOWN(n)  CSI HLEB_STRINGIZE_V(n) "B"
+#define CURFWD(n)   CSI HLEB_STRINGIZE_V(n) "C"
+#define CURBWD(n)   CSI HLEB_STRINGIZE_V(n) "D"
+#define CURNXTL(n)  CSI HLEB_STRINGIZE_V(n) "E"
+#define CURPRVL(n)  CSI HLEB_STRINGIZE_V(n) "F"
+#define CURPOS(r,c) CSI HLEB_STRINGIZE_V(r) ";" HLEB_STRINGIZE_V(c) "H"
 
-#define CLRDISP(p)  CSI str(p) "J"
-#define CLRLINE(p)  CSI str(p) "K"
+#define CLRDISP(p)  CSI HLEB_STRINGIZE_V(p) "J"
+#define CLRLINE(p)  CSI HLEB_STRINGIZE_V(p) "K"
 
-#define SCRLUP(n)   CSI str(n) "S"
-#define SCRLDWN(n)  CSI str(n) "T"
+#define SCRLUP(n)   CSI HLEB_STRINGIZE_V(n) "S"
+#define SCRLDWN(n)  CSI HLEB_STRINGIZE_V(n) "T"
 
 #define REPORT      CSI "6n"
 
 #define SAVEPOS     "\e7"
 #define RESTPOS     "\e8"
 
-#define SETCOLOR(c) CSI str(c) "m"
+#define SETCOLOR(c) CSI HLEB_STRINGIZE_V(c) "m"
 
 #define RBLACK      30
 #define RRED        31  
