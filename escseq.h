@@ -38,20 +38,20 @@
 #define SETCOLOR(c) CSI HLEB_STRINGIZE_V(c) "m"
 
 #define RBLACK      30
-#define RRED        31  
-#define RGREEN      32 
-#define RYELLOW     33 
-#define RBLUE       34 
-#define RMAGNETA    35 
-#define RCYAN       36 
-#define RWHITE      37 
-#define BBLACK      90 
-#define BRED        91  
-#define BGREEN      92  
-#define BYELLOW     93 
-#define BBLUE       94  
-#define BMAGNETA    95  
-#define BCYAN       96  
+#define RRED        31
+#define RGREEN      32
+#define RYELLOW     33
+#define RBLUE       34
+#define RMAGNETA    35
+#define RCYAN       36
+#define RWHITE      37
+#define BBLACK      90
+#define BRED        91
+#define BGREEN      92
+#define BYELLOW     93
+#define BBLUE       94
+#define BMAGNETA    95
+#define BCYAN       96
 #define BWHITE      97
 
 #endif // HLEB_ESCSEQ_H
