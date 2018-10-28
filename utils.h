@@ -1,8 +1,6 @@
 #ifndef HLEB_UTILS_H
 #define HLEB_UTILS_H
 
-#include "ct_assert.h"
-
 #ifndef __GNUC__
     #error "hleb lib relies on GNU C extensions. Use gcc compiler"
 #endif

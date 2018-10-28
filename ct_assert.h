@@ -22,7 +22,7 @@
             _hleb_ct_assert_line_##line();                                  \
     } while(0)
 
-#define ct_assert(cond)                                                     \
+#define $ct_assert(cond)                                                    \
     HLEB_COMPILETIME_ASSERT(cond, "ct_assert failed: " #cond)
 
 #endif // HLEB_CT_ASSERT_H

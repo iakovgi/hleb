@@ -1,8 +1,6 @@
 #ifndef HLEB_ESCSEQ_H
 #define HLEB_ESCSEQ_H
 
-#include "utils.h"
-
 #ifndef __GNUC__
     #error "hleb lib relies on GNU C extensions. Use gcc compiler"
 #endif

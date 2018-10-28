@@ -1,10 +1,6 @@
 #ifndef HLEB_LOG_H
 #define HLEB_LOG_H
 
-#include "utils.h"
-#include "escseq.h"
-#include "attribute.h"
-
 #ifndef __GNUC__
     #error "hleb lib relies on GNU C extensions. Use gcc compiler"
 #endif
@@ -118,7 +114,6 @@ char        hleb_log_buf[HLEB_LOG_BUF_LEN] = {};
 
 #define $HLEB_LOG_VAR(var, func...)                                          \
     do {                                                                    \
-        char ___ld##line[HLEB_LOG_BUF_LEN] = {};                            \
         int  ___nargs = HLEB_COUNT_ARGS(func);                              \
         char* ___fstr = SETCOLOR(BRED)"Undefined type"RESET;                \
         $fprintf("%s: var log: (" #var ") = ", $HLEB_LOG_WHENCE);           \
