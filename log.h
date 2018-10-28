@@ -144,5 +144,7 @@ char        hleb_log_buf[HLEB_LOG_BUF_LEN] = {};
         $fprintf("\n");                                                     \
     } while(0)
 
+#define HLEB_LOG_VAR_M(vars...) HLEB_FOREACH(HLEB_LOG_VAR, vars)
+
 #endif // HLEB_LOG_H
 
