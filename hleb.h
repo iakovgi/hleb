@@ -135,9 +135,9 @@
 #endif
 
 #ifdef HLEB_SUPPRESS_LIB_NAME
-    #define log_func                    HLEB_LOG_FUNC
+    #define log_func                    HLEB_FUNC_LOG
 #else
-    #define hleb_log_func               HLEB_LOG_FUNC
+    #define hleb_log_func               HLEB_FUNC_LOG
 #endif
 
 #ifdef HLEB_SUPPRESS_LIB_NAME
