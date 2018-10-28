@@ -114,12 +114,12 @@ char        hleb_log_buf[HLEB_LOG_BUF_LEN] = {};
         $fprintf("%s %s", $HLEB_LOG_WHENCE, msg);                           \
     } while(0)
 
-#define HLEB_DUMP_VAR(var, func...)                                         \
+#define HLEB_LOG_VAR(var, func...)                                          \
     do {                                                                    \
         char ___ld##line[HLEB_LOG_BUF_LEN] = {};                            \
         int  ___nargs = HLEB_COUNT_ARGS(func);                              \
         char* ___fstr = SETCOLOR(BRED)"Undefined type"RESET;                \
-        $fprintf("%s: (" #var ") = ", $HLEB_LOG_WHENCE);                    \
+        $fprintf("%s: var log: (" #var ") = ", $HLEB_LOG_WHENCE);           \
         if(___nargs == 0) {                                                 \
             if     (HLEB_SAME_TYPE((var), int))            ___fstr = "%d";  \
             else if(HLEB_SAME_TYPE((var), unsigned))       ___fstr = "%u";  \
@@ -136,9 +136,9 @@ char        hleb_log_buf[HLEB_LOG_BUF_LEN] = {};
             else if(HLEB_SAME_TYPE((var),                                   \
                                      unsigned long long))  ___fstr = "%llu";\
         } else {                                                            \
-            _Pragma("GCC diagnostic ignored \"-Wint-conversion\"");         \
-            ___fstr = func((var));                                          \
-            _Pragma("GCC diagnostic warning \"-Wint-conversion\"");         \
+            HLEB_WITH_WARN_IGNORED( "-Wint-conversion",                     \
+                ___fstr = func((var));                                      \
+            )                                                               \
         }                                                                   \
         $fprintf(___fstr, (var));                                           \
         $fprintf("\n");                                                     \
