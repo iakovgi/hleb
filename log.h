@@ -118,19 +118,27 @@ char        hleb_log_buf[HLEB_LOG_BUF_LEN] = {};
     do {                                                                    \
         char ___ld##line[HLEB_LOG_BUF_LEN] = {};                            \
         int  ___nargs = HLEB_COUNT_ARGS(func);                              \
-        char* ___fstr = NULL;                                               \
+        char* ___fstr = SETCOLOR(BRED)"Undefined type"RESET;                \
         $fprintf("%s: (" #var ") = ", $HLEB_LOG_WHENCE);                    \
         if(___nargs == 0) {                                                 \
-            if     (HLEB_SAME_TYPE((var), int))     ___fstr = "%d";         \
-            else if(HLEB_SAME_TYPE((var), char))    ___fstr = "%c";         \
-            else if(HLEB_SAME_TYPE((var), char*))   ___fstr = "%s";         \
-            else if(HLEB_SAME_TYPE((var), float))   ___fstr = "%f";         \
-            else if(HLEB_SAME_TYPE((var), double))  ___fstr = "%lf";        \
-            else if(HLEB_SAME_TYPE((var), unsigned))___fstr = "%u";         \
-            else if(HLEB_SAME_TYPE((var), void*))   ___fstr = "%p";         \
-            else abort();                                                   \
-        }  else {                                                           \
+            if     (HLEB_SAME_TYPE((var), int))            ___fstr = "%d";  \
+            else if(HLEB_SAME_TYPE((var), unsigned))       ___fstr = "%u";  \
+            else if(HLEB_SAME_TYPE((var), char))           ___fstr = "%c";  \
+            else if(HLEB_SAME_TYPE((var), char*))          ___fstr = "%s";  \
+            else if(HLEB_SAME_TYPE((var), float))          ___fstr = "%f";  \
+            else if(HLEB_SAME_TYPE((var), double))         ___fstr = "%lf"; \
+            else if(HLEB_SAME_TYPE((var), void*))          ___fstr = "%p";  \
+            else if(HLEB_SAME_TYPE((var), long))           ___fstr = "%ld"; \
+            else if(HLEB_SAME_TYPE((var), unsigned long))  ___fstr = "%lu"; \
+            else if(HLEB_SAME_TYPE((var), short))          ___fstr = "%hd"; \
+            else if(HLEB_SAME_TYPE((var), unsigned short)) ___fstr = "%hu"; \
+            else if(HLEB_SAME_TYPE((var), long long))      ___fstr = "%lld";\
+            else if(HLEB_SAME_TYPE((var),                                   \
+                                     unsigned long long))  ___fstr = "%llu";\
+        } else {                                                            \
+            _Pragma("GCC diagnostic ignored \"-Wint-conversion\"");         \
             ___fstr = func((var));                                          \
+            _Pragma("GCC diagnostic warning \"-Wint-conversion\"");         \
         }                                                                   \
         $fprintf(___fstr, (var));                                           \
         $fprintf("\n");                                                     \

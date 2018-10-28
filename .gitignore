@@ -9,3 +9,6 @@ test
 *.swp
 *.swo
 
+#log files
+hleb_log*
+
