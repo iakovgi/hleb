@@ -7,7 +7,7 @@
     #error "hleb lib relies on GNU C extensions. Use gcc compiler"
 #endif
 
-#define HLEB_STINGIZE(e)        #e
+#define HLEB_STRINGIZE(e)       #e
 #define HLEB_STRINGIZE_V(e)     HLEB_STRINGIZE(e)
 
 #define __QLINE__               HLEB_STRINGIZE_V(__LINE__)
