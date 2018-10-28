@@ -36,5 +36,16 @@
 #define HLEB_COUNT_ARGS(...)                                                \
     $HLEB_COUNT_ARGS(, ##__VA_ARGS__, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
 
+#define $$HLEB_WITH_WARN_IGNORED(warn) GCC diagnostic ignored warn
+
+#define $HLEB_WITH_WARN_IGNORED(warn)                                       \
+    HLEB_STRINGIZE_V($$HLEB_WITH_WARN_IGNORED(warn))
+
+#define HLEB_WITH_WARN_IGNORED(warn, what...)                               \
+    _Pragma("GCC diagnostic push")                                          \
+    _Pragma($HLEB_WITH_WARN_IGNORED(warn))                                  \
+    what                                                                    \
+    _Pragma("GCC diagnostic pop")
+
 #endif // HLEB_UTILS_H
 
