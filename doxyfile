@@ -1,0 +1,10 @@
+DOXYFILE_ENCODING   = UTF-8
+OUTPUT_LANGUAGE     = English
+OUTPUT_DIRECTORY    = ./doc
+
+PROJECT_NAME        = Hleb
+PROJECT_BRIEF       = Useful GCC-specific defines
+
+INPUT               = hleb.h attrubute.h escseq.h
+EXTRACT_ALL         = YES
+
