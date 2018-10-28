@@ -1,3 +1,11 @@
+/**
+ * @file
+ * @brief   This file defines useful attributes
+ *
+ * GCC has attributes that can be applied to functions or variables. While
+ * default syntax is ugly, there is defines for most useful of them.
+ */
+
 #ifndef HLEB_ATTRIBUTE_H
 #define HLEB_ATTRIBUTE_H
 

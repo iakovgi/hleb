@@ -1,3 +1,10 @@
+/**
+ * @file
+ * @brief   This file defines most useful ANSI escape sequences
+ *
+ *  It's hard to remember tonns of constant values, so this file defines useful
+ *  ANSI escape sequences
+ */
 #ifndef HLEB_ESCSEQ_H
 #define HLEB_ESCSEQ_H
 

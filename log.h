@@ -134,7 +134,8 @@ char        hleb_log_buf[HLEB_LOG_BUF_LEN] = {};
                                      unsigned long long))  ___fstr = "%llu";\
         } else {                                                            \
             HLEB_WITH_WARN_IGNORED( "-Wint-conversion",                     \
-                ___fstr = func((var));                                      \
+                typeof(var) __var   = (var);                                \
+                ___fstr = func(&__var);                                     \
             )                                                               \
         }                                                                   \
         $fprintf(___fstr, (var));                                           \
