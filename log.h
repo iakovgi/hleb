@@ -111,10 +111,12 @@ char        hleb_log_buf[HLEB_LOG_BUF_LEN] = {};
 
 #define HLEB_LOG(msg)                                                       \
     do {                                                                    \
-        $fprintf("%s %s", $HLEB_LOG_WHENCE, msg);                           \
+        $fprintf("%s: %s\n", $HLEB_LOG_WHENCE, msg);                        \
     } while(0)
 
-#define HLEB_LOG_VAR(var, func...)                                          \
+#define HLEB_LOG_VAR(var, func...) $HLEB_LOG_VAR(var, func)
+
+#define $HLEB_LOG_VAR(var, func...)                                          \
     do {                                                                    \
         char ___ld##line[HLEB_LOG_BUF_LEN] = {};                            \
         int  ___nargs = HLEB_COUNT_ARGS(func);                              \
